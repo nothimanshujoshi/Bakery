@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shreya’s Bae-kry | Creative Dessert & Coffee Studio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Outfit:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" rel="stylesheet">
+
+    <style>
+        /* ============================
+           1. 2026 STUDIO VARIABLES
+           ============================ */
+        :root {
+            /* Palette: Editorial & Warm */
+            --bg-cream: #FDFCF8;      /* Base: Soft Cream */
+            --bg-latte: #F2EBE5;      /* Secondary: Warm Beige */
+            --bg-blush: #F7EFF0;      /* Accent: Very Pale Pink */
+            
+            --text-dark: #2C2420;     /* Deep Espresso */
+            --text-muted: #6D635F;    /* Soft Brown */
+            
+            --accent-gold: #C2A878;   /* Muted Gold */
+            --border-light: rgba(44, 36, 32, 0.08);
+
+            /* Typography */
+            --font-head: 'Italiana', serif;
+            --font-body: 'Outfit', sans-serif;
+            --font-script: 'Pinyon Script', cursive;
+
+            /* Spacing & UI */
+            --container: 90%;
+            --max-width: 1300px;
+            --radius-std: 16px;
+            --radius-lg: 32px;
+            --transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Reset & Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography System */
+        h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 400; line-height: 1.1; }
+        
+        h1 { font-size: clamp(3rem, 6vw, 5.5rem); letter-spacing: -1px; }
+        h2 { font-size: clamp(2.2rem, 4vw, 3.5rem); margin-bottom: 20px; }
+        h3 { font-size: 1.5rem; letter-spacing: 0.5px; }
+        
+        .script-accent {
+            font-family: var(--font-script);
+            color: var(--accent-gold);
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        p { color: var(--text-muted); font-size: 1.05rem; }
+
+        /* Buttons: Pill Style */
+        .btn {
+            display: inline-block;
+            padding: 14px 34px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: var(--text-dark);
+            color: #fff;
+            border: 1px solid var(--text-dark);
+        }
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-dark);
+            border: 1px solid var(--text-dark);
+        }
+        .btn-outline:hover {
+            background-color: var(--text-dark);
+            color: #fff;
+        }
+
+        /* Layout Utilities */
+        .container {
+            width: var(--container);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+        .section-pad { padding: 100px 0; }
+
+        /* ============================
+           2. NAVIGATION
+           ============================ */
+        nav {
+            padding: 25px 0;
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(253, 252, 248, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--text-dark); transition: 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* ============================
+           3. HERO SECTION (Lifestyle)
+           ============================ */
+        .hero {
+            padding-top: 140px; /* Space for fixed nav */
+            padding-bottom: 80px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 { margin-bottom: 30px; line-height: 1.05; }
+        .hero-text p { margin-bottom: 40px; max-width: 450px; font-size: 1.2rem; }
+
+        .hero-image-block {
+            position: relative;
+            height: 600px;
+        }
+
+        .main-img {
+            width: 90%; height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            margin-left: 10%;
+        }
+        
+        /* Floating Badge */
+        .hero-badge {
+            position: absolute;
+            bottom: 40px; left: 0;
+            background: #fff;
+            padding: 25px;
+            border-radius: var(--radius-std);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            max-width: 250px;
+        }
+
+        /* ============================
+           4. MARQUEE (Studio Vibes)
+           ============================ */
+        .marquee-container {
+            background: var(--text-dark);
+            color: #fff;
+            padding: 15px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 25s linear infinite;
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .marquee-content span { margin: 0 40px; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* ============================
+           5. VERTICALS (Bento Grid)
+           ============================ */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 350px);
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            position: relative;
+            border-radius: var(--radius-std);
+            overflow: hidden;
+            cursor: pointer;
+            group: hover;
+            transition: var(--transition);
+        }
+
+        .service-card img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .service-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            color: #fff;
+        }
+
+        .service-card:hover img { transform: scale(1.05); }
+
+        /* Grid Spans */
+        .span-2-col { grid-column: span 2; }
+        .span-2-row { grid-row: span 2; }
+
+        /* ============================
+           6. WEDDING SPOTLIGHT (Minimal)
+           ============================ */
+        .wedding-section {
+            background-color: var(--bg-blush);
+            text-align: center;
+        }
+
+        .wedding-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .wedding-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .wedding-gallery img {
+            height: 400px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-std);
+        }
+        
+        .wedding-gallery img:nth-child(2) {
+            transform: translateY(-30px); /* Staggered look */
+        }
+
+        /* ============================
+           7. LIFESTYLE (Coffee & Workshop)
+           ============================ */
+        .lifestyle-section {
+            background-color: var(--bg-latte); /* Warm coffee tone */
+        }
+
+        .lifestyle-flex {
+            display: flex;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .lifestyle-text { flex: 1; }
+        .lifestyle-img { flex: 1; }
+
+        .feature-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+        .feature-list i { color: var(--text-muted); }
+
+        /* ============================
+           8. THE MENU (Good Bakes)
+           ============================ */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .menu-item {
+            text-align: center;
+        }
+        .menu-img {
+            width: 100%;
+            aspect-ratio: 1/1.2;
+            object-fit: cover;
+            border-radius: 100px 100px 16px 16px; /* Arch Shape */
+            margin-bottom: 20px;
+        }
+
+        /* ============================
+           9. FOOTER
+           ============================ */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--bg-cream);
+            padding: 80px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            text-align: left;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 40px;
+        }
+
+        .footer-col h4 { margin-bottom: 20px; color: #fff; }
+        .footer-col p, .footer-col a { color: rgba(255,255,255,0.7); display: block; margin-bottom: 10px; text-decoration: none; }
+        .footer-col a:hover { color: #fff; }
+
+        /* ============================
+           RESPONSIVE
+           ============================ */
+        @media (max-width: 968px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-image-block { height: 400px; order: -1; margin-bottom: 40px; }
+            .main-img { margin: 0; width: 100%; }
+            .hero-badge { display: none; }
+            
+            .services-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .span-2-col, .span-2-row { grid-column: span 1; grid-row: auto; height: 300px; }
+            
+            .lifestyle-flex { flex-direction: column-reverse; }
+            .nav-links { display: none; } /* Mobile menu simplified */
+            
+            .wedding-gallery { grid-template-columns: 1fr; }
+            .wedding-gallery img:nth-child(2) { transform: none; }
+            
+            .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="#" class="logo">Shreya’s Bae-kry</a>
+            <div class="nav-links">
+                <a href="#about">Studio</a>
+                <a href="#verticals">Offerings</a>
+                <a href="#workshops">Workshops</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero container">
+        <div class="hero-grid">
+            <div class="hero-text">
+                <span class="script-accent">Est. 2024</span>
+                <h1>A Creative Dessert <br>& Coffee Studio</h1>
+                <p>More than a bakery. We are a boutique space for eggless desserts, artisanal coffee, and creative baking workshops. Crafted for life's sweet moments.</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; md:justify-content: flex-start;">
+                    <a href="#verticals" class="btn btn-primary">Explore Offerings</a>
+                    <a href="#contact" class="btn btn-outline">Enquire Custom</a>
+                </div>
+            </div>
+            <div class="hero-image-block">
+                <img src="https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?q=80&w=1000&auto=format&fit=crop" class="main-img" alt="Studio Lifestyle">
+                
+                <div class="hero-badge">
+                    <h4>Today's Special</h4>
+                    <p style="font-size: 0.9rem; margin: 5px 0 0;">Rose Pistachio Tea Cake & Pour-over Coffee.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span>Bespoke Cakes</span> • 
+            <span>Small Batch Coffee</span> • 
+            <span>Baking Workshops</span> • 
+            <span>Eggless Desserts</span> • 
+            <span>Gifting Studio</span> • 
+            <span>Bespoke Cakes</span> • 
+            <span>Small Batch Coffee</span> • 
+            <span>Baking Workshops</span> • 
+            <span>Eggless Desserts</span> • 
+            <span>Gifting Studio</span> • 
+        </div>
+    </div>
+
+    <section class="section-pad container" id="about">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <span class="script-accent">The Creator</span>
+            <h2>Baked with Intention</h2>
+            <p>Welcome to my creative outlet. Shreya’s Bae-kry isn't just about flour and sugar; it's about the connection we share over a slice of cake or a warm cup of coffee. I specialize in 100% vegetarian baking that feels indulgent, looks editorial, and tastes like home.</p>
+        </div>
+    </section>
+
+    <section class="section-pad" id="verticals">
+        <div class="container">
+            <h3>What We Do</h3>
+            <div class="services-grid">
+                
+                <div class="service-card span-2-row">
+                    <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?q=80&w=800&auto=format&fit=crop" alt="Wedding Cakes">
+                    <div class="service-overlay">
+                        <h3>Celebration Cakes</h3>
+                        <p>Bespoke tier cakes for weddings & milestones.</p>
+                    </div>
+                </div>
+
+                <div class="service-card span-2-col">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000&auto=format&fit=crop" alt="Coffee">
+                    <div class="service-overlay">
+                        <h3>The Coffee Bar</h3>
+                        <p>Artisanal brews & pour-overs.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?q=80&w=600&auto=format&fit=crop" alt="Desserts">
+                    <div class="service-overlay">
+                        <h3>Eggless Desserts</h3>
+                        <p>Cookies, Brownies & Jars.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1622576897152-a2c731e59e6e?q=80&w=1170&auto=format&fit=crop	" alt="Workshops">
+                    <div class="service-overlay">
+                        <h3>Workshops</h3>
+                        <p>Learn the art of baking.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section-pad wedding-section">
+        <div class="container">
+            <div class="wedding-content">
+                <span class="script-accent">Weddings & Events</span>
+                <h2>Designed for Your Big Day</h2>
+                <p>We work closely with couples to design cakes that are as unique as their love story. From minimalist textures to grand floral arrangements.</p>
+                <br>
+                <a href="#contact" class="btn btn-outline">Book Consultation</a>
+            </div>
+            <div class="wedding-gallery">
+                <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?q=80&w=600&auto=format&fit=crop" alt="Cake Detail">
+                <img src="https://i.pinimg.com/1200x/5d/a6/12/5da612ab2373194f2a0216f678a63129.jpg" alt="Wedding Table">
+                <img src="https://images.unsplash.com/photo-1546379782-7b9235cf24ae?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tier Cake">
+            </div>
+        </div>
+    </section>
+
+    <section class="section-pad lifestyle-section" id="workshops">
+        <div class="container">
+            <div class="lifestyle-flex">
+                <div class="lifestyle-text">
+                    <span class="script-accent">Community & Learning</span>
+                    <h2>Coffee & Workshops</h2>
+                    <p>Shreya’s Bae-kry is a space to learn and linger. Join us for weekend baking masterclasses or stop by for our signature house blend coffee.</p>
+                    
+                    <ul class="feature-list">
+                        <li><i class="ri-cup-line"></i> Small-batch roasted coffee</li>
+                        <li><i class="ri-group-line"></i> Hands-on baking workshops</li>
+                        <li><i class="ri-gift-line"></i> Curated gift boxes</li>
+                    </ul>
+
+                    <a href="#" class="btn btn-primary">View Workshop Calendar</a>
+                </div>
+                <div class="lifestyle-img">
+                    <img src="https://images.unsplash.com/photo-1687102626222-cc819882b295?q=80&w=687&auto=format&fit=crop" style="width: 100%; border-radius: var(--radius-lg);" alt="Workshop">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-pad container">
+        <div style="text-align: center;">
+            <h2>The Daily Menu</h2>
+            <p>Fresh from the oven. Available for pickup & delivery.</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1599785209796-786432b228bc?q=80&w=600&auto=format&fit=crop" class="menu-img" alt="Cupcakes">
+                <h4>Floral Cupcakes</h4>
+                <p>Vanilla Bean & Rose</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://plus.unsplash.com/premium_photo-1673532486669-59ed38df23c9?q=80&w=1170&auto=format&fit=crop" class="menu-img" alt="Cookies">
+                <h4>NYC Cookies</h4>
+                <p>Dark Chocolate Chunk</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1564875197268-d336949dc1a9?q=80&w=686&auto=format&fit=crop" class="menu-img" alt="Cake Mixes">
+                <h4>Pancake Mixes</h4>
+                <p>Make at Home Series</p>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1506459225024-1428097a7e18?q=80&w=600&auto=format&fit=crop" class="menu-img" alt="Brownies">
+                <h4>Fudgy Brownies</h4>
+                <p>Walnut & Sea Salt</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-logo">Shreya’s Bae-kry</div>
+            <p>Bespoke Eggless Desserts, Baked with Love.</p>
+            
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Visit Us</h4>
+                    <p>The Studio, Block C</p>
+                    <p>New Delhi, India</p>
+                    <p>Tue - Sun: 11am - 8pm</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Enquiries</h4>
+                    <p>+91 98765 43210</p>
+                    <a href="mailto:hello@shreyasbaekry.com">hello@shreyasbaekry.com</a>
+                    <a href="#">@shreyasbaekry</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <a href="#">Wedding Cakes</a>
+                    <a href="#">Workshops</a>
+                    <a href="#">Corporate Gifting</a>
+                    <a href="#">Order Online</a>
+                </div>
+            </div>
+            
+            <div style="margin-top: 60px; font-size: 0.8rem; color: rgba(255,255,255,0.4);">
+                © 2026 Shreya’s Bae-kry. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
